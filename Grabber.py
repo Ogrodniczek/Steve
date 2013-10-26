@@ -1,4 +1,3 @@
-
 import os
 import datetime
 import numpy
@@ -24,17 +23,18 @@ class BitmapGrinder(ScreenBits):
         print ('x: ', x, 'y: ',y)
         print 'searching handle', datetime.datetime.now()-then
 
-    def crop_image(self, x1, x2, y1, y2, image):
+    def crop_image(self, x1, x2, y1, y2):
         then = datetime.datetime.now()
         small_array = numpy.asarray(self.im)[y1:y2, x1:x2]
         print 'crop', datetime.datetime.now()-then
-        self.find_pattern(image, small_array)
 
-#screen = BitmapGrinder('EVE')
-screen = BitmapGrinder('Computer')
-screen.initialize_window()
-screen.refresh_image()
-#screen.find_pattern(os.path.abspath(os.path.join('.', 'favorites'+".bmp")))
-#screen.find_pattern(os.path.abspath(os.path.join('.', 'workgroup'+".bmp")))
-screen.crop_image(15, 140, 72, 306, os.path.abspath(os.path.join('.', 'pictures'+".bmp")))
-screen.save_window_image()
+
+if __name__ == "__main__":
+    #screen = BitmapGrinder('EVE')
+    screen = BitmapGrinder('Computer')
+    screen.initialize_window()
+    screen.refresh_image()
+    screen.find_pattern(os.path.abspath(os.path.join('.', 'favorites'+".bmp")))
+    screen.find_pattern(os.path.abspath(os.path.join('.', 'workgroup'+".bmp")))
+    #screen.crop_image(15, 140, 72, 306, os.path.abspath(os.path.join('.', 'pictures'+".bmp")))
+    screen.save_window_image()

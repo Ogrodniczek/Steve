@@ -4,6 +4,7 @@ import win32con
 import win32ui
 import os
 import Image
+import datetime
 
 
 class EnumWind:
@@ -47,6 +48,7 @@ class ScreenBits:
 
 
     def refresh_image(self):
+        then = datetime.datetime.now()
         l, t, r, b, h, w, lm, tm = self._get_window_coordinates()
         self.bitmap = win32ui.CreateBitmap()
         self.bitmap.CreateCompatibleBitmap(self.mfcDC, w, h)
@@ -61,8 +63,9 @@ class ScreenBits:
                                            self.bmpinfo['bmHeight']),
                                    self.bmpstr, 'raw', 'BGRX', 0, 1)
         saveDC.DeleteDC()
+        print 'refresh image ', datetime.datetime.now()-then
 
     def save_window_image(self):
-        jpgname = os.path.abspath(os.path.join('.', 'grabbed'+".jpg"))
-        print(os.path.abspath(jpgname))
-        self.im.save(jpgname, format = 'jpeg', quality = 85)
+        bmpname = os.path.abspath(os.path.join('.', 'grabbed'+".bmp"))
+        print(os.path.abspath(bmpname))
+        self.im.save(bmpname, format = 'bmp')
